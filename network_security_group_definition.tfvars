@@ -7,6 +7,10 @@ network_security_group_definition = {
     nsg = []
   }
 
+  app_service = {
+    nsg=[]
+  }
+
   application_gateway = {
 
     nsg = [

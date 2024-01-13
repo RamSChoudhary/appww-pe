@@ -3,7 +3,7 @@ vnets = {
     resource_group_key = "agw_region1"
     vnet = {
       name          = "app_gateway"
-      address_space = ["10.100.100.0/16"]
+      address_space = ["10.100.0.0/16"]
     }
     specialsubnets = {}
     subnets = {
@@ -16,6 +16,11 @@ vnets = {
         name    = "app_gateway-public"
         cidr    = ["10.100.100.128/25"]
         nsg_key = "application_gateway_public_ingress"
+      }
+      app_service = {
+        name    = "app_service"
+        cidr    = ["10.100.100.128/25"]
+        nsg_key = "app_service"
       }
     }
 
