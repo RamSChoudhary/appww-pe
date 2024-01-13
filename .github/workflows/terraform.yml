@@ -41,7 +41,7 @@ jobs:
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       - name: Terraform Init
         run: terraform init -no-color
-        working-directory: connectivity
+        #working-directory: connectivity
 
       - name: Azure Login
         uses: azure/login@v1
@@ -54,9 +54,9 @@ jobs:
       # #Generates an execution plan for Terraform
       - name: Terraform Plan
         run: terraform plan -input=false -var-file=virtual_network.tfvars -var-file=network_security_group_definition.tfvars -var-file=application_gateways.tfvars -var-file=applications.tfvars -var-file=configuration.tfvars -no-color 
-        working-directory: connectivity
+        #working-directory: connectivity
 
       - name: Terraform Apply - 1
-        #if: github.ref == 'refs/heads/"main1"' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/"main1"' && github.event_name == 'push'
         run: terraform apply -auto-approve -var-file=data.tfvars
         working-directory: connectivity
