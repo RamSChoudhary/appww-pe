@@ -25,6 +25,7 @@ module "caf" {
     #private_dns_vnet_links = local.private_dns_vnet_links_v1
     #application_gateway_applications = var.application_gateway_applications
     #application_gateways = var.application_gateways
+    vnets           = var.vnets
   }
 
   # To deploy Bastion workload.
@@ -33,9 +34,9 @@ module "caf" {
 #   }
 
   # To create vnet links in private dns zone.
-  remote_objects = {
-    vnets           = var.vnets
+  #remote_objects = {
+   # vnets           = var.vnets
     #private_dns     = local.private_dns
     #resource_groups = local.resource_groups_remote
-  }
+  #}
 }
