@@ -2,9 +2,6 @@ variable "application_gateway_applications" {
   
 }
 
-variable "application_gateway_applications" {
-  
-}
 
 variable "global_settings" {
   
