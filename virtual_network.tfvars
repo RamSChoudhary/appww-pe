@@ -17,11 +17,11 @@ vnets = {
         cidr    = ["10.100.100.128/25"]
         nsg_key = "application_gateway_public_ingress"
       }
-      app_service = {
-        name    = "app_service"
-        cidr    = ["10.100.100.128/25"]
-        nsg_key = "app_service"
-      }
+    #   app_service = {
+    #     name    = "app_service"
+    #     cidr    = ["10.100.100.128/25"]
+    #     nsg_key = "app_service"
+    #   }
     }
 
   }
