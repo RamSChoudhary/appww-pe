@@ -24,7 +24,7 @@ module "caf" {
     #vnet_peerings_v1       = local.vnet_peerings_v1
     #private_dns_vnet_links = local.private_dns_vnet_links_v1
     #application_gateway_applications = var.application_gateway_applications
-    #application_gateways = var.application_gateways
+    application_gateways = var.application_gateways
     vnets           = var.vnets
   }
 
