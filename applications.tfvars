@@ -9,21 +9,21 @@ application_gateway_applications = {
         name                           = "demo-app1-80-private"
         front_end_ip_configuration_key = "private"
         front_end_port_key             = "80"
-        host_name                      = "azurestaticapps.net"
+        host_name                      = "azurewebsites.net"
         request_routing_rule_key       = "rule1"
       }
       public = {
         name                           = "demo-app1-80-public"
         front_end_ip_configuration_key = "public"
         front_end_port_key             = "81"
-        host_name                      = "azurestaticapps.net"
+        host_name                      = "azurewebsites.net"
         request_routing_rule_key       = "rule2"
       }
       public_82 = {
         name                           = "demo-app1-82-public"
         front_end_ip_configuration_key = "public"
         front_end_port_key             = "82"
-        host_name                      = "azurestaticapps.net"
+        host_name                      = "azurewebsites.net"
         request_routing_rule_key       = "path_based"
       }
     }
@@ -74,7 +74,7 @@ application_gateway_applications = {
 
     backend_pool = {
       fqdns = [
-        "wonderful-forest-07ccae810.4.azurestaticapps.net"
+        "app-svc-pe.azurewebsites.net"
       ]
     }
 
