@@ -26,3 +26,8 @@ variable "vnets" {
 variable "application_gateways" {
   
 }
+
+variable "networking" {
+  description = "Configuration object - networking resources"
+  default     = {}
+}
