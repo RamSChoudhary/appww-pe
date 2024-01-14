@@ -27,8 +27,8 @@ security = {
    networking = {
      public_ip_addresses    = var.public_ip_addresses
      network_security_group_definition = var.network_security_group_definition
-#     application_gateway_applications = var.application_gateway_applications
-#     application_gateways = var.application_gateways
+     application_gateway_applications = var.application_gateway_applications
+     application_gateways = var.application_gateways
      vnets           = var.vnets
    }
   
