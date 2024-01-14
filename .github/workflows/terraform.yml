@@ -53,10 +53,10 @@ jobs:
 
       # #Generates an execution plan for Terraform
       - name: Terraform Plan
-        run: terraform plan -input=false -var-file=virtual_network.tfvars -var-file=network_security_group_definition.tfvars -var-file=application_gateways.tfvars -var-file=applications.tfvars -var-file=configuration.tfvars -no-color 
+        run: terraform plan -input=false -var-file=data.tfvars -no-color 
         #working-directory: connectivity
 
       - name: Terraform Apply - 1
         #if: github.ref == 'refs/heads/"main1"' && github.event_name == 'push'
-        run: terraform apply -auto-approve -var-file=virtual_network.tfvars -var-file=network_security_group_definition.tfvars -var-file=application_gateways.tfvars -var-file=applications.tfvars -var-file=configuration.tfvars
+        run: terraform apply -auto-approve -var-file=data.tfvars  
         #working-directory: connectivity
