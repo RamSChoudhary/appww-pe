@@ -11,6 +11,14 @@ variable "resource_groups" {
   
 }
 
+variable "keyvault_certificates" {
+  
+}
+
+variable "keyvaults" {
+  
+}
+
 variable "public_ip_addresses" {
   
 }

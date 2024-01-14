@@ -1,6 +1,6 @@
 application_gateways = {
-  agw1 = {
-    resource_group_key = "agw_region1"
+  agw1_az1 = {
+    resource_group_key = "rg_region1"
     name               = "app_gateway_example"
     vnet_key           = "vnet_region1"
     subnet_key         = "app_gateway_private"
@@ -14,6 +14,12 @@ application_gateways = {
     }
     zones        = ["1"]
     enable_http2 = true
+
+    identity = {
+      managed_identity_keys = [
+        "apgw_keyvault_secrets"
+      ]
+    }
 
     front_end_ip_configurations = {
       public = {
@@ -37,20 +43,26 @@ application_gateways = {
         port     = 80
         protocol = "Http"
       }
-      81 = {
-        name     = "http-81"
-        port     = 81
-        protocol = "Http"
-      }
-      82 = {
-        name     = "http-82"
-        port     = 82
-        protocol = "Http"
-      }
       443 = {
         name     = "https-443"
         port     = 443
         protocol = "Https"
+      }
+      4431 = {
+        name     = "https-4431"
+        port     = 4431
+        protocol = "Https"
+      }
+    }
+
+    redirect_configurations = {
+      redirect-https = {
+        name                 = "redirect-https"
+        redirect_type        = "Permanent"
+        target_listener_name = "demoapp1-443-private"
+        # target_url           = ""
+        include_path         = true
+        include_query_string = false
       }
     }
   }

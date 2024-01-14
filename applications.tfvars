@@ -1,68 +1,46 @@
 application_gateway_applications = {
-  demo_app1_80_private = {
-
-    application_gateway_key = "agw1"
+  demo_app1_az1_agw1 = {
     name                    = "demoapp1"
+    application_gateway_key = "agw1_az1"
 
     listeners = {
-      private = {
-        name                           = "demo-app1-80-private"
+      private_ssl = {
+        name                           = "demoapp1-443-private"
         front_end_ip_configuration_key = "private"
-        front_end_port_key             = "80"
-        host_name                      = "azurewebsites.net"
-        request_routing_rule_key       = "rule1"
+        front_end_port_key             = "443"
+        host_name                      = "demoapp1.cafdemo.com"
+        request_routing_rule_key       = "default1"
+        keyvault_certificate = {
+          certificate_key = "demoapp1.cafdemo.com"
+          // To use manual uploaded cert
+          # certificate_name = "testkhairi"
+          # keyvault_key     = "certificates"
+          #  keyvault_id     = "/subscriptions/97958dac-xxxx-xxxx-xxxx-9f436fa73bd4/resourceGroups/jmtv-rg-example-app-gateway-re1/providers/Microsoft.KeyVault/vaults/jmtv-kv-certs"
+        }
       }
-      public = {
-        name                           = "demo-app1-80-public"
+      public_ssl = {
+        name                           = "demoapp1-4431-public"
         front_end_ip_configuration_key = "public"
-        front_end_port_key             = "81"
-        host_name                      = "azurewebsites.net"
-        request_routing_rule_key       = "rule2"
-      }
-      public_82 = {
-        name                           = "demo-app1-82-public"
-        front_end_ip_configuration_key = "public"
-        front_end_port_key             = "82"
-        host_name                      = "azurewebsites.net"
-        request_routing_rule_key       = "path_based"
+        front_end_port_key             = "4431"
+        host_name                      = "demoapp1.cafdemo.com"
+        request_routing_rule_key       = "default2"
+        keyvault_certificate = {
+          certificate_key = "demoapp1.cafdemo.com"
+          // To use manual uploaded cert
+          # certificate_name = "testkhairi"
+          # keyvault_id     = "/subscriptions/97958dac-xxxx-xxxx-xxxx-9f436fa73bd4/resourceGroups/jmtv-rg-example-app-gateway-re1/providers/Microsoft.KeyVault/vaults/jmtv-kv-certs"
+        }
       }
     }
 
     request_routing_rules = {
-      rule1 = {
+      default1 = {
         rule_type = "Basic"
         priority  = 10
-        #rewrite_rule_set_key = "rule_set_1"
       }
-      rule2 = {
+      default2 = {
         rule_type = "Basic"
-        priority  = 13
-        #rewrite_rule_set_key = "rule_set_1"
-      }
-      path_based = {
-        rule_type        = "PathBasedRouting"
-        url_path_map_key = "path_map_1"
-        priority         = 11
-      }
-    }
-
-    url_path_maps = {
-      path_map_1 = {
-        name                         = "path_map_1"
-        default_rewrite_rule_set_key = "rule_set_1"
-        path_rules = {
-          pathRuleIdentity = {
-            name  = "pathRuleIdentity"
-            paths = ["/identity*"]
-            #rewrite_rule_set_key = "rule_set_1"
-          }
-
-          pathRuleAuthorisation = {
-            name  = "pathRuleAuthorization"
-            paths = ["/authorization*"]
-            #rewrite_rule_set_key = "rule_set_1"
-          }
-        }
+        priority  = 11
       }
     }
 
@@ -74,86 +52,32 @@ application_gateway_applications = {
 
     backend_pool = {
       fqdns = [
-        "app-svc-pe.azurewebsites.net"
+        "cafdemo.appserviceenvironment.net"
       ]
     }
 
-    rewrite_rule_sets = {
-      rule_set_1 = {
-        name = "header-rules"
-        rewrite_rules = {
-          rule_1 = {
-            name          = "server-header-remove"
-            rule_sequence = 100
-            #conditions = {
-            #condition_1 = {
-            #variable = "http_status"
-            #pattern = "200"
-            #ignore_case = true
-            #negate = false
-            #}
-            #}
-            response_header_configurations = {
-              server_header = {
-                header_name  = "Server"
-                header_value = "" # Use blank value to remove header
-              }
-            }
-            # url = {
-            #   path          = ""
-            #   query_string  = ""
-            #   reroute       = false
-            # }
-          }
+  }
 
-          rule_2 = {
-            name          = "hsts-add-header"
-            rule_sequence = 101
-            #conditions = {
-            #condition_1 = {
-            #variable = "http_status"
-            #pattern = "200"
-            #ignore_case = true
-            #negate = false
-            #}
-            #}
-            response_header_configurations = {
-              hsts_header = {
-                header_name  = "Strict-Transport-Security"
-                header_value = "max-age=31536000"
-              }
-            }
-            # url = {
-            #   path          = ""
-            #   query_string  = ""
-            #   reroute       = false
-            # }
-          }
+  redirect-https = {
+    name                    = "redirect-https"
+    type                    = "redirect"
+    application_gateway_key = "agw1_az1"
 
-          rule_3 = {
-            name          = "add-request-header"
-            rule_sequence = 102
-            #conditions = {
-            #condition_1 = {
-            #variable = "http_status"
-            #pattern = "200"
-            #ignore_case = true
-            #negate = false
-            #}
-            #}
-            request_header_configurations = {
-              foo_header = {
-                header_name  = "foo"
-                header_value = "123456"
-              }
-            }
-            # url = {
-            #   path          = ""
-            #   query_string  = ""
-            #   reroute       = false
-            # }
-          }
-        }
+    listeners = {
+      private = {
+        name                           = "demoapp1-80-private"
+        front_end_ip_configuration_key = "private"
+        front_end_port_key             = "80"
+        host_name                      = "demoapp1.cafdemo.com"
+        request_routing_rule_key       = "default"
+      }
+    }
+
+    request_routing_rules = {
+      default = {
+        rule_type                   = "Basic"
+        redirect_configuration_name = "redirect-https"
+        priority                    = 20
       }
     }
   }
